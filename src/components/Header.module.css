@@ -1,8 +1,10 @@
 .header {
   position: fixed;
   width: 100%;
+  height: 3rem;
   display: flex;
   justify-content: right;
+  align-items: center;
 }
 
 .mode {
