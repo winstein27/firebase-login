@@ -26,3 +26,8 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
+.navlinks li > a {
+  text-decoration: none;
+  color: inherit;
+}

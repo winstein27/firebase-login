@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import {
   MdDarkMode as DarkModeIcon,
   //   MdOutlineDarkMode as DarkModeOutlinedIcon,
@@ -10,12 +11,16 @@ const Header = () => {
     <header className={styles.header}>
       <div>
         <span className={styles.mode}>
-          <DarkModeIcon />
+          <DarkModeIcon title="Dark mode on/off" />
         </span>
         <nav className={styles.navbar}>
           <ul className={styles.navlinks}>
-            <li>LOG IN</li>
-            <li>SIGN UP</li>
+            <li>
+              <NavLink to={'/login'}>LOG IN</NavLink>
+            </li>
+            <li>
+              <NavLink to={'/signup'}>SIGN UP</NavLink>
+            </li>
           </ul>
         </nav>
       </div>
