@@ -2,6 +2,8 @@ import React from 'react';
 
 import styles from './SignUpForm.module.css';
 
+import Button from '../UI/Button';
+
 const SignUpForm = () => {
   const submittedFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ const SignUpForm = () => {
         <label htmlFor="confirm-password">Re-enter password</label>
         <input type="password" name="confirm-password" />
 
-        <button type="submit">Send</button>
+        <Button type="submit">Send</Button>
       </form>
     </div>
   );

@@ -2,6 +2,8 @@ import React from 'react';
 
 import styles from './LogInForm.module.css';
 
+import Button from '../UI/Button';
+
 const LogInForm = () => {
   const submittedFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ const LogInForm = () => {
         <label htmlFor="password">Password</label>
         <input type="password" name="password" />
 
-        <button type="button">Login</button>
+        <Button type="button">Login</Button>
       </form>
     </div>
   );
