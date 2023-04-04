@@ -29,6 +29,11 @@
   display: block;
 }
 
+.invalid {
+  background-color: #ffbcbc;
+  border: 1px solid red;
+}
+
 @media (min-width: 800px) {
   .form > label {
     display: inline-block;
