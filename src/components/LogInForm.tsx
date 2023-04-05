@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import styles from './LogInForm.module.css';
 
@@ -29,6 +30,19 @@ const LogInForm = () => {
 
   const submittedFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!enteredEmailIsValid || !enteredPasswordIsValid) {
+      return;
+    }
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+      .then((userCredencial) => {
+        console.log('logged', userCredencial);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -63,7 +77,7 @@ const LogInForm = () => {
           }
         />
 
-        <Button type="button">Login</Button>
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );

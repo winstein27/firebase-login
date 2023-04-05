@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 import styles from './SignUpForm.module.css';
 
@@ -55,6 +56,31 @@ const SignUpForm = () => {
 
   const submittedFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    enteredFirstNameBlurHandler();
+    enteredLastNameBlurHandler();
+    enteredEmailBlurHandler();
+    enteredPasswordBlurHandler();
+    enteredConfirmationPasswordBlurHandler();
+
+    if (
+      !enteredFirstNameIsValid ||
+      !enteredLastNameIsValid ||
+      !enteredEmailIsValid ||
+      !enteredPasswordIsValid ||
+      !enteredConfirmationPasswordIsValid
+    ) {
+      return;
+    }
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+      .then((userCredential) => {
+        console.log('created', userCredential);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
