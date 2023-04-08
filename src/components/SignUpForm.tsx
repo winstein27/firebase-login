@@ -5,7 +5,7 @@ import styles from './SignUpForm.module.css';
 
 import useInput from '../hooks/useInput';
 
-import Button from '../UI/Button';
+import Button from './UI/Button';
 
 const SignUpForm = () => {
   const {
