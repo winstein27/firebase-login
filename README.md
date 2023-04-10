@@ -22,6 +22,7 @@ Users should be able to:
 
 - Create an account using email and password
 - Login with the created account
+- Logout from my account
 
 ### Screenshot
 
@@ -39,6 +40,7 @@ Users should be able to:
 - CSS custom properties
 - Mobile-first workflow
 - React
+- Context API
 - React Router
 - React Icons
 - TypeScript
@@ -47,6 +49,51 @@ Users should be able to:
 - Yarn
 
 ### What I learned
+
+Context API (Creating context and provider):
+
+```ts
+const UserContext = createContext({
+  userIsLogged: false,
+  loggedUser: {} as User,
+  logUserIn: (userCredential: Firebase.UserCredential) => {},
+  logUserOut: () => {},
+});
+```
+
+```ts
+const UserProvider = (props: { children: React.ReactNode }) => {
+  const [userState, setUserState] = useState(initalState);
+
+  const logUserIn = (userCredential: Firebase.UserCredential) => {
+    setUserState({
+      userIsLogged: true,
+      loggedUser: {
+        id: userCredential.user.uid,
+        firstName: '',
+        lastName: '',
+        email: userCredential.user.email || '',
+      },
+    });
+  };
+
+  const logUserOut = () => {
+    setUserState(initalState);
+  };
+
+  const userContext = {
+    userIsLogged: userState.userIsLogged,
+    loggedUser: userState.loggedUser,
+    logUserIn,
+    logUserOut,
+  };
+
+  return (
+    <UserContext.Provider value={userContext}>
+      {props.children}
+    </UserContext.Provider>
+  );
+```
 
 React hook to validate inputs:
 
