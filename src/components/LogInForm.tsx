@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import styles from './LogInForm.module.css';
+
+import UserContext from '../store/UserContext';
 
 import useInput from '../hooks/useInput';
 
 import Button from './UI/Button';
 
 const LogInForm = () => {
+  const userCtx = useContext(UserContext);
+  const navigator = useNavigate();
+
   const {
     value: enteredEmail,
     touched: enteredEmailTouched,
@@ -38,7 +44,8 @@ const LogInForm = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then((userCredencial) => {
-        console.log('logged', userCredencial);
+        userCtx.logUserIn(userCredencial);
+        navigator('/welcome');
       })
       .catch((error) => {
         console.log(error);

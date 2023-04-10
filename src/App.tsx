@@ -4,6 +4,8 @@ import { getAuth } from 'firebase/auth';
 
 import router from './Routes';
 
+import UserProvider from './store/UserProvider';
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
@@ -16,7 +18,11 @@ const firebaseConfig = {
 function App() {
   const app = initializeApp(firebaseConfig);
   getAuth(app);
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }
 
 export default App;
