@@ -7,6 +7,7 @@ const UserContext = createContext({
   userIsLogged: false,
   loggedUser: {} as User,
   logUserIn: (userCredential: Firebase.UserCredential) => {},
+  logUserOut: () => {},
 });
 
 export default UserContext;

@@ -5,16 +5,18 @@ import UserContext from './UserContext';
 
 import User from './User';
 
+const initalState = {
+  userIsLogged: false,
+  loggedUser: {} as User,
+};
+
 const UserProvider = (props: { children: React.ReactNode }) => {
-  const [userState, setUserState] = useState({
-    loggedIn: false,
-    user: {} as User,
-  });
+  const [userState, setUserState] = useState(initalState);
 
   const logUserIn = (userCredential: Firebase.UserCredential) => {
     setUserState({
-      loggedIn: true,
-      user: {
+      userIsLogged: true,
+      loggedUser: {
         id: userCredential.user.uid,
         firstName: '',
         lastName: '',
@@ -23,10 +25,15 @@ const UserProvider = (props: { children: React.ReactNode }) => {
     });
   };
 
+  const logUserOut = () => {
+    setUserState(initalState);
+  };
+
   const userContext = {
-    userIsLogged: userState.loggedIn,
-    loggedUser: userState.user,
+    userIsLogged: userState.userIsLogged,
+    loggedUser: userState.loggedUser,
     logUserIn,
+    logUserOut,
   };
 
   return (

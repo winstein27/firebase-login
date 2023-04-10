@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   MdDarkMode as DarkModeIcon,
   //   MdOutlineDarkMode as DarkModeOutlinedIcon,
@@ -6,7 +7,17 @@ import {
 
 import styles from './Header.module.css';
 
+import UserContext from '../store/UserContext';
+
 const Header = () => {
+  const userCtx = useContext(UserContext);
+  const navigator = useNavigate();
+
+  const logoutClickedHandler = () => {
+    userCtx.logUserOut();
+    navigator('/login');
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -15,12 +26,21 @@ const Header = () => {
         </span>
         <nav className={styles.navbar}>
           <ul className={styles.navlinks}>
-            <li>
-              <NavLink to={'/login'}>LOG IN</NavLink>
-            </li>
-            <li>
-              <NavLink to={'/signup'}>SIGN UP</NavLink>
-            </li>
+            {userCtx.userIsLogged && (
+              <li>
+                <button onClick={logoutClickedHandler}>LOG OUT</button>
+              </li>
+            )}
+            {!userCtx.userIsLogged && (
+              <>
+                <li>
+                  <NavLink to={'/login'}>LOG IN</NavLink>
+                </li>
+                <li>
+                  <NavLink to={'/signup'}>SIGN UP</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>

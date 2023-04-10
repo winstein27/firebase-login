@@ -34,3 +34,9 @@
   text-decoration: none;
   color: inherit;
 }
+
+.navlinks li > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
