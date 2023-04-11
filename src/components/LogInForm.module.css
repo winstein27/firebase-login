@@ -24,16 +24,17 @@
 .form > input {
   width: 90%;
   border-radius: 6px;
-  background-color: #fcfcfc;
+  background-color: inherit;
+  border: 1px solid grey;
+}
+
+.form > input.invalid {
+  background-color: #ffbcbc;
+  border: 1px solid red;
 }
 
 .form > button {
   margin: 1rem 0;
-}
-
-.invalid {
-  background-color: #ffbcbc;
-  border: 1px solid red;
 }
 
 @media (min-width: 800px) {

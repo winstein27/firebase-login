@@ -5,7 +5,14 @@
   display: flex;
   justify-content: right;
   align-items: center;
+}
+
+.light {
   background-color: #fff;
+}
+
+.dark {
+  background-color: #3b3b3b;
 }
 
 .mode {

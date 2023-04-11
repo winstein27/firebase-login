@@ -18,6 +18,7 @@ const firebaseConfig = {
 function App() {
   const app = initializeApp(firebaseConfig);
   getAuth(app);
+
   return (
     <UserProvider>
       <RouterProvider router={router} />

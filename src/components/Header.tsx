@@ -9,7 +9,12 @@ import styles from './Header.module.css';
 
 import UserContext from '../store/UserContext';
 
-const Header = () => {
+interface Props {
+  theme: string;
+  themeClickedHandler: () => void;
+}
+
+const Header = (props: Props) => {
   const userCtx = useContext(UserContext);
   const navigator = useNavigate();
 
@@ -19,9 +24,9 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${styles[props.theme]}`}>
       <div>
-        <span className={styles.mode}>
+        <span className={styles.mode} onClick={props.themeClickedHandler}>
           <DarkModeIcon title="Dark mode on/off" />
         </span>
         <nav className={styles.navbar}>
