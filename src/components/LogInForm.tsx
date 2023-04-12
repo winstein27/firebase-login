@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 import styles from './LogInForm.module.css';
 
@@ -48,7 +49,17 @@ const LogInForm = () => {
         navigator('/welcome');
       })
       .catch((error) => {
-        console.log(error);
+        const code = error.code;
+        let message;
+
+        if (code === 'auth/user-not-found' || code === 'auth/wrong-password') {
+          message = 'Wrong email or password.';
+        } else if (code === 'auth/too-many-requests') {
+          message =
+            'Account has been temporarily disabled due to many failed login attempts.';
+        }
+
+        toast.error(message);
       });
   };
 
