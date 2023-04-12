@@ -126,6 +126,7 @@ const useInput = (props: Props) => {
 
 - [React Environment Variables](https://jasonwatmore.com/post/2022/06/22/react-access-environment-variables-from-dotenv-env) - This helped to set up environment variables to configure Firebase without exposing credentials.
 - [Vite Environment Variables](https://vitejs.dev/guide/env-and-mode.html) - This helped to set up Vite environment variables.
+- [Dark mode](https://www.makeuseof.com/how-to-add-dark-mode-to-a-react-application/) - This helped to implement light/dark mode.
 
 ## Author
 
