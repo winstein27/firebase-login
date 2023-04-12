@@ -1,9 +1,6 @@
 import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import {
-  MdDarkMode as DarkModeIcon,
-  //   MdOutlineDarkMode as DarkModeOutlinedIcon,
-} from 'react-icons/md';
+import { MdDarkMode as DarkModeIcon } from 'react-icons/md';
 
 import styles from './Header.module.css';
 
