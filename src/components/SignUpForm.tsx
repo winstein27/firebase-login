@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 import styles from './SignUpForm.module.css';
 
@@ -8,6 +10,8 @@ import useInput from '../hooks/useInput';
 import Button from './UI/Button';
 
 const SignUpForm = () => {
+  const navigator = useNavigate();
+
   const {
     value: enteredFirstName,
     isValid: enteredFirstNameIsValid,
@@ -63,24 +67,40 @@ const SignUpForm = () => {
     enteredPasswordBlurHandler();
     enteredConfirmationPasswordBlurHandler();
 
-    if (
-      !enteredFirstNameIsValid ||
-      !enteredLastNameIsValid ||
-      !enteredEmailIsValid ||
-      !enteredPasswordIsValid ||
-      !enteredConfirmationPasswordIsValid
-    ) {
-      return;
-    }
+    const formIsValid =
+      enteredFirstNameIsValid &&
+      enteredLastNameIsValid &&
+      enteredEmailIsValid &&
+      enteredPasswordIsValid &&
+      enteredConfirmationPasswordIsValid;
 
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-      .then((userCredential) => {
-        console.log('created', userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (formIsValid) {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+        .then(() => {
+          toast('Account created, please login.');
+          navigator('/login');
+        })
+        .catch((error) => {
+          toast(error.message);
+        });
+    } else {
+      if (!enteredFirstNameIsValid) {
+        toast('Please, enter a valid first name.');
+      }
+      if (!enteredLastNameIsValid) {
+        toast('Please, enter a valid last name.');
+      }
+      if (!enteredEmailIsValid) {
+        toast('Please, enter a valid email.');
+      }
+      if (!enteredPasswordIsValid) {
+        toast('The password should have as least 8 caracters.');
+      }
+      if (!enteredConfirmationPasswordIsValid) {
+        toast('Entered passwords are not the same.');
+      }
+    }
   };
 
   return (
