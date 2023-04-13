@@ -43,6 +43,7 @@ Users should be able to:
 - Context API
 - React Router
 - React Icons
+- React Toastify
 - TypeScript
 - Vite
 - Firebase
